@@ -50,7 +50,10 @@ jobs:
           ./scripts/feeds install -a
 
       - name: Generate configuration file
-        run: make defconfig
+        run: |
+           rm -f ./.config*
+           rm -rf ./tmp
+           make defconfig
 
       - name: Make download
         run: |
