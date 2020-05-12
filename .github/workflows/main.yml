@@ -65,13 +65,13 @@ jobs:
       - name: 涡轮增雕进程
         run: |
           rm -rf package/lean/luci-theme-argon
-          git clone https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
+          git clone https://github.com/jerrykuku/luci-theme-argon.git
           git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
-          git clone https://github.com/tty228/luci-app-serverchan package/luci-app-serverchan
-          git clone https://github.com/kang-mk/luci-app-smartinfo package/luci-app-smartinfo
+          git clone https://github.com/tty228/luci-app-serverchan.git
+          git clone https://github.com/kang-mk/luci-app-smartinfo.git
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
