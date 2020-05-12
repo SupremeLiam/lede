@@ -68,10 +68,10 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/jerrykuku/luci-theme-argon.git
-          git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
-          git clone https://github.com/tty228/luci-app-serverchan.git
-          git clone https://github.com/kang-mk/luci-app-smartinfo.git
+          git clone git@github.com:jerrykuku/luci-theme-argon.git
+          git clone git@github.com:openwrt-develop/luci-theme-atmaterial.git
+          git clone git@github.com:tty228/luci-app-serverchan.git
+          git clone https://github.com/iamaluckyguy/luci-app-smartinfo
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
@@ -356,7 +356,7 @@ jobs:
       - name: Compile firmware
         run: |
           echo -e "$(nproc) thread build."
-          make -j1 V=s
+          make -j$(nproc) V=s
       - name : Upload artifact
         uses: actions/upload-artifact@master
         with:
