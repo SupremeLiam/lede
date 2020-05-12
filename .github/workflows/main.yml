@@ -198,7 +198,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-usb-printer=y
           CONFIG_PACKAGE_luci-app-upnp=y
           CONFIG_PACKAGE_luci-app-vlmcsd=y
-          CONFIG_PACKAGE_luci-app-vsftpd-tls=y
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-v2ray-server=y
           CONFIG_PACKAGE_luci-app-verysync=y
@@ -233,7 +232,6 @@ jobs:
           CONFIG_PACKAGE_rsync=y
           CONFIG_RSYNC_zlib=y
           CONFIG_PACKAGE_rsyncd=y
-          CONFIG_PACKAGE_vsftpd=y
           CONFIG_PACKAGE_wget=y
           CONFIG_PACKAGE_amule=y
           CONFIG_AMULE_CRYPTOPP_STATIC_LINKING=y 
