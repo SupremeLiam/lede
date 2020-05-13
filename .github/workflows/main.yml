@@ -54,7 +54,7 @@ jobs:
             mysql* \
             php*
           sudo -E apt-get update
-          sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3.5 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf
+          sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler
           sudo -E apt-get -y autoremove --purge
           sudo -E apt-get clean
       #- name: 同步最新的源码
@@ -71,14 +71,13 @@ jobs:
           git clone https://github.com/jerrykuku/luci-theme-argon.git
           git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
           git clone https://github.com/tty228/luci-app-serverchan.git
-          git clone https://github.com/iamaluckyguy/luci-app-smartinfo.git
+          git clone https://github.com/iamaluckyguy/luci-app-smartinfo.git      
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
       - name: Custom configure file
         run: |
-          rm -rf ./tmp
           rm -f ./.config*
           touch ./.config
           #
@@ -155,16 +154,11 @@ jobs:
           CONFIG_PACKAGE_luci-app-smartinfo=y #磁盘健康监控
           CONFIG_PACKAGE_automount=y
           CONFIG_DEFAULT_kmod-tcp-bbr=y
-          CONFIG_DEFAULT_kmod-usb-ledtrig-usbport=y
-          CONFIG_PACKAGE_luci-app-accesscontrol=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
           CONFIG_PACKAGE_luci-app-aria2=y
           CONFIG_PACKAGE_luci-app-airplay2=y
           CONFIG_PACKAGE_luci-app-amule=y
-          CONFIG_PACKAGE_luci-app-arpbind=y
-          CONFIG_PACKAGE_luci-app-autoreboot=y
           CONFIG_PACKAGE_luci-app-baidupcs-web=y
-          CONFIG_PACKAGE_luci-app-cpufreq=y
           CONFIG_PACKAGE_luci-app-docker=y
           CONFIG_PACKAGE_luci-app-ddns=y
           CONFIG_PACKAGE_luci-app-diskman=y
@@ -194,121 +188,17 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
-          CONFIG_PACKAGE_luci-app-unblockmusic=y
-          CONFIG_PACKAGE_luci-app-usb-printer=y
           CONFIG_PACKAGE_luci-app-upnp=y
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-v2ray-server=y
           CONFIG_PACKAGE_luci-app-verysync=y
-          CONFIG_DEFAULT_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-webadmin=y
           CONFIG_PACKAGE_luci-app-wireguard=y
-          CONFIG_PACKAGE_luci-app-wol=y
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
-          CONFIG_PACKAGE_luci-app-zerotier=y
-          CONFIG_PACKAGE_luci-i18n-mwan3-ja=m
-          CONFIG_PACKAGE_luci-i18n-mwan3-ru=m
           CONFIG_PACKAGE_luci-i18n-mwan3-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-mwan3-zh-tw=m
           CONFIG_PACKAGE_luci-i18n-mwan3helper-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-unblockmusic-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-usb-printer-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-vsftpd-zh-cn=y
           CONFIG_PACKAGE_luci-i18n-webadmin-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-wireguard-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-wifischedule-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-wol-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-wrtbwmon-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-zerotier-zh-cn=y
-          CONFIG_PACKAGE_youtube-dl=y
-          CONFIG_PACKAGE_rclone-webui-react=y
-          CONFIG_PACKAGE_ariang=y
-          CONFIG_PACKAGE_webui-aria2=y
-          CONFIG_ARIA2_NOXML=y
-          CONFIG_ARIA2_BITTORRENT=y
-          CONFIG_ARIA2_WEBSOCKET=y
-          CONFIG_PACKAGE_lftp=y
-          CONFIG_PACKAGE_rsync=y
-          CONFIG_RSYNC_zlib=y
-          CONFIG_PACKAGE_rsyncd=y
-          CONFIG_PACKAGE_wget=y
-          CONFIG_PACKAGE_amule=y
-          CONFIG_AMULE_CRYPTOPP_STATIC_LINKING=y 
-          CONFIG_PACKAGE_ip-full=y
-          CONFIG_PACKAGE_mwan3=y
-          CONFIG_PACKAGE_tc=y
-          CONFIG_PACKAGE_frpc=y
-          CONFIG_NGINX_SSL=y
-          CONFIG_NGINX_DAV=y
-          CONFIG_NGINX_FLV=y
-          CONFIG_NGINX_STUB_STATUS=y
-          CONFIG_NGINX_HTTP_CHARSET=y
-          CONFIG_NGINX_HTTP_GZIP=y
-          CONFIG_NGINX_HTTP_SSI=y
-          CONFIG_NGINX_HTTP_USERID=y
-          CONFIG_NGINX_HTTP_ACCESS=y
-          CONFIG_NGINX_HTTP_AUTH_BASIC=y
-          CONFIG_NGINX_HTTP_AUTH_REQUEST=y
-          CONFIG_NGINX_HTTP_AUTOINDEX=y
-          CONFIG_NGINX_HTTP_GEO=y
-          CONFIG_NGINX_HTTP_MAP=y
-          CONFIG_NGINX_HTTP_SPLIT_CLIENTS=y
-          CONFIG_NGINX_HTTP_REFERER=y
-          CONFIG_NGINX_HTTP_REWRITE=y
-          CONFIG_NGINX_HTTP_PROXY=y
-          CONFIG_NGINX_HTTP_FASTCGI=y
-          CONFIG_NGINX_HTTP_UWSGI=y
-          CONFIG_NGINX_HTTP_SCGI=y
-          CONFIG_NGINX_HTTP_MEMCACHED=y
-          CONFIG_NGINX_HTTP_LIMIT_CONN=y
-          CONFIG_NGINX_HTTP_LIMIT_REQ=y
-          CONFIG_NGINX_HTTP_EMPTY_GIF=y
-          CONFIG_NGINX_HTTP_BROWSER=y
-          CONFIG_NGINX_HTTP_UPSTREAM_HASH=y
-          CONFIG_NGINX_HTTP_UPSTREAM_IP_HASH=y
-          CONFIG_NGINX_HTTP_UPSTREAM_LEAST_CONN=y
-          CONFIG_NGINX_HTTP_UPSTREAM_KEEPALIVE=y
-          CONFIG_NGINX_HTTP_CACHE=y
-          CONFIG_NGINX_HTTP_V2=y
-          CONFIG_NGINX_PCRE=y
-          CONFIG_NGINX_NAXSI=y
-          CONFIG_NGINX_LUA=y
-          CONFIG_NGINX_HTTP_REAL_IP=y
-          CONFIG_NGINX_HTTP_SECURE_LINK=y
-          CONFIG_NGINX_HTTP_SUB=y
-          CONFIG_NGINX_HEADERS_MORE=y
-          CONFIG_NGINX_HTTP_BROTLI=y
-          CONFIG_NGINX_STREAM_CORE_MODULE=y
-          CONFIG_NGINX_TS_MODULE=y
-          CONFIG_PACKAGE_nginx-all-module=y
-          CONFIG_PACKAGE_samba4-libs=y
-          CONFIG_PACKAGE_samba4-server=y
-          CONFIG_SAMBA4_SERVER_NETBIOS=y
-          CONFIG_SAMBA4_SERVER_AVAHI=y
-          CONFIG_SAMBA4_SERVER_VFS=y
-          CONFIG_PACKAGE_vlmcsd=y
-          CONFIG_PACKAGE_vnstat=y
-          CONFIG_PACKAGE_vnstati=y
-          CONFIG_PACKAGE_shairplay=y
-          CONFIG_PACKAGE_bzip2=y
-          CONFIG_PACKAGE_unzip=y
-          CONFIG_PACKAGE_xz-utils=y
-          CONFIG_PACKAGE_xz=y
-          CONFIG_PACKAGE_sqlite3-cli=y
-          CONFIG_PACKAGE_coremark=y
-          CONFIG_PACKAGE_coreutils=y
-          CONFIG_PACKAGE_coreutils-base64=y
-          CONFIG_PACKAGE_k3screenctrl=y
-          CONFIG_PACKAGE_mount-utils=y
-          CONFIG_PACKAGE_openssl-util=y
-          CONFIG_PACKAGE_shellsync=y
-          CONFIG_PACKAGE_sysstat=y
-          CONFIG_PACKAGE_tar=y
-          CONFIG_PACKAGE_TAR_GZIP=y
-          CONFIG_PACKAGE_TAR_BZIP2=y
-          CONFIG_PACKAGE_TAR_XZ=y
-          CONFIG_PACKAGE_ubi-utils=y
           EOF
           # LuCI主题:
           cat >> .config <<EOF
@@ -332,7 +222,6 @@ jobs:
           cat >> .config <<EOF
           # CONFIG_TARGET_IMAGES_PAD is not set
           # CONFIG_VMDK_IMAGES is not set
-          # CONFIG_PACKAGE_vsftpd-alt is not set
           EOF
           # 
           # ========================固件定制部分结束========================
