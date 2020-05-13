@@ -147,6 +147,9 @@ jobs:
           CONFIG_PACKAGE_kmod-usb2=y
           CONFIG_PACKAGE_kmod-usb2-pci=y
           CONFIG_PACKAGE_kmod-usb3=y
+          CONFIG_PACKAGE_kmod-usb-uhci=y
+          CONFIG_PACKAGE_fdisk=y
+          CONFIG_PACKAGE_usbutils=y
           EOF
           # 常用LuCI插件选择:
           cat >> .config <<EOF
@@ -183,6 +186,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-shadowsocks-libev=y
           CONFIG_PACKAGE_luci-app-shairplay=y
+          CONFIG_DEFAULT_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
@@ -217,11 +221,14 @@ jobs:
           CONFIG_PACKAGE_tree=y
           CONFIG_PACKAGE_vim-fuller=y
           CONFIG_PACKAGE_wget=y
+          CONFIG_DOCKER_NET_MACVLAN=y
+          CONFIG_PACKAGE_kmod-macvlan=y
           EOF
           # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
           cat >> .config <<EOF
           # CONFIG_TARGET_IMAGES_PAD is not set
           # CONFIG_VMDK_IMAGES is not set
+          # CONFIG_PACKAGE_kmod-usb-storage-uas is not set
           EOF
           # 
           # ========================固件定制部分结束========================
